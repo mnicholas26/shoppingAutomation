@@ -107,7 +107,7 @@ function nextPage()
     let btns = document.querySelectorAll('div.btn-group');
     let pages = btns[1];
     let pagebutton = pages.children[pages.children.length-1];
-    if(pagebutton.disabled) createUI();
+    if(pagebutton.disabled) ;//createUI();
     else
     {
         simulate(pagebutton, 'click');
@@ -168,4 +168,4 @@ function createUI()
 
 var timer;
 var outputstring = "";
-grabAdresses(getButtons());
+//grabAdresses(getButtons());
