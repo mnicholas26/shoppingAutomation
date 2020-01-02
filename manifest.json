@@ -14,7 +14,10 @@
     "content_scripts": [{
         "matches": ["https://www.etsy.com/your/orders/*"],
         "js": ["etsy.js"]
-    }],
+    },{
+		"matches": ["https://old.reddit.com/*"],
+		"js": ["test.js"]
+	}],
 
 	"permissions": [
         "https://www.etsy.com/your/orders/*",
