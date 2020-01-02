@@ -1,10 +1,17 @@
+var dashboardport = {};
+
 chrome.runtime.onInstalled.addListener(function (){
-    chrome.browserAction.onClicked.addListener(function() { 
-        chrome.tabs.create({ url: chrome.runtime.getURL("dashboard.html") });
+    chrome.browserAction.onClicked.addListener(function() {
+        if(dashboardport.name == undefined)
+        {
+            chrome.tabs.create({ url: chrome.runtime.getURL("dashboard.html") });
+        }
+        else
+        {
+            dashboardport.postMessage("make active");
+        }
     });
 });
-
-var dashboardport = {};
 
 chrome.runtime.onConnect.addListener(function(port) {
     if(port.name == "etsy" || port.name == "test" || port.name == "dashboard")
@@ -47,6 +54,11 @@ chrome.runtime.onConnect.addListener(function(port) {
                     port.postMessage("setup");
                 }
             });
+            port.onDisconnect.addListener(() =>
+            {
+                console.log("port disconnected");
+                dashboardport = {};
+            })
         }
     }
-  });
+});

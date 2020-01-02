@@ -12,6 +12,15 @@ port.onMessage.addListener(function (msg)
     {
         titlesFromStorage();
     }
+    else if(msg == "make active")
+    {
+        chrome.tabs.getCurrent(function(t) {
+            chrome.tabs.update(t.id, {'highlighted': true});
+        });
+        chrome.windows.getCurrent(function(w){
+            chrome.windows.update(w.id, {'focused': true});
+        });
+    }
 });
 
 function titlesFromStorage()
