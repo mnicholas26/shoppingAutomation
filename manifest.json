@@ -16,7 +16,8 @@
         "js": ["etsy.js"]
     },{
 		"matches": ["https://old.reddit.com/*"],
-		"js": ["test.js"]
+		"js": ["test.js"],
+		"css": ["test.css"]
 	}],
 
 	"permissions": [

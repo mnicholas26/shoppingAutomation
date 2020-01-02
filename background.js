@@ -12,25 +12,24 @@ chrome.runtime.onConnect.addListener(function(port) {
             port.onMessage.addListener(function(msg)
             {
                 console.log(msg);
-                if(msg == "ready")
+                if(msg.page == "reddit/top")
                 {
-                    port.postMessage("test");
+                    if(msg.msg == "ready")
+                    {
+                        port.postMessage("setup");
+                    }
+                    else if (msg.msg == "sending titles")
+                    {
+                        let titles = msg.content;
+                        for(let i = 0; i < titles.length; i++)
+                        {
+                            let item = document.createElement('p');
+                            item.textContent = titles[i];
+                            document.body.appendChild(item);
+                        }
+                    }
                 }
             });
         }   
     }
   });
-
-/*chrome.runtime.onMessage.addListener(function(message){
-    //console.log(message);
-    //document.body.innerHTML = message;
-    chrome.runtime.sendMessage("go");
-    if(message == "etsy-start")
-    {
-        chrome.runtime.sendMessage("setup");
-    }
-    else
-    {
-        document.body.innerHTML = message;
-    }
-});*/
