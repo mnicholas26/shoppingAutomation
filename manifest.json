@@ -21,7 +21,8 @@
 	}],
 
 	"permissions": [
-        "https://www.etsy.com/your/orders/*",
+		"https://www.etsy.com/your/orders/*",
+		"storage",
         "unlimitedStorage"
     ],
 	"browser_action": {

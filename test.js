@@ -1,12 +1,10 @@
-var setup = false;
 var port = chrome.runtime.connect({ name: "test" });
 port.postMessage({page: "reddit/top", msg: "ready"});
 port.onMessage.addListener(function (msg) 
 {
     console.log(msg);
-    if (msg == "setup" && !setup)
+    if (msg == "setup")
     {
-        setup = true;
         //document.getElementById()
         let buttonLocation = document.getElementsByClassName("menuarea")[0];
         buttonLocation.appendChild(makeButtons());
