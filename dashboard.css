@@ -1,0 +1,58 @@
+* {
+    overflow: hidden;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+#toolbar{
+    height: 150px;
+    width: 100%;
+    background-color: aqua;
+}
+
+#tabcontent{
+    display: flex;
+    height: calc(100% - 150px);
+    width: 100%;
+    background-color: blueviolet;
+}
+
+#sidebars{
+    width: 200px;
+    height: 100%;
+    background-color: chartreuse;
+}
+
+#pages{
+    height: 100%;
+    width: calc(100% - 200px);
+    background-color: crimson;
+}
+
+.sidebar{
+    height: 100%;
+    width: 100%;
+    background-color: darkgrey;;
+}
+
+.page{
+    height: 100%;
+    width: 100%;
+    background-color: gold;
+    display: none;
+}
+
+.sidebar button{
+    width: 100%;
+    height: 60px;
+    background-color: hotpink;
+    margin-bottom: 5px;
+    border: 0;
+}
+
+.pagevisible{
+    display: block;
+}
