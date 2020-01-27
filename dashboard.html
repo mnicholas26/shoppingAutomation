@@ -10,26 +10,40 @@
   </head>
   <body>
     <div id="toolbar">
-      <ul id="tabbtns"></ul>
+      <ul id="tabbtns">
+        <button>tab 1</button>
+        <button>tab 2</button>
+      </ul>
       <div id="settings"></div>
     </div>
     <div id="tabs">
-      <div class="tab">
+      <div class="tab tabvisible" id="tab1">
         <div class="sidebar">
-          <button>page1</button>
-          <button>page2</button>
-          <button>page3</button>
-          <button>page4</button>
+          <button>pagea1</button>
+          <button>pagea2</button>
+          <button>pagea3</button>
+          <button>pagea4</button>
         </div>
         <div class="pages">
-          <div class="page">page1</div>
-          <div class="page">page2</div>
-          <div class="page">page3</div>
-          <div class="page">page4</div>
+          <div class="page pagevisible">pagea1</div>
+          <div class="page">pagea2</div>
+          <div class="page">pagea3</div>
+          <div class="page">pagea4</div>
         </div>
       </div>
-      <div class="tab">
-
+      <div class="tab" id="tab2">
+        <div class="sidebar">
+          <button>pageb1</button>
+          <button>pageb2</button>
+          <button>pageb3</button>
+          <button>pageb4</button>
+        </div>
+        <div class="pages">
+          <div class="page pagevisible">pageb1</div>
+          <div class="page">pageb2</div>
+          <div class="page">pageb3</div>
+          <div class="page">pageb4</div>
+        </div>
       </div>
     </div>
   </body>

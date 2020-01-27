@@ -54,17 +54,85 @@ function clearTitles()
 
 //page constuction and link up
 window.onload = setupApp;
+var tabs = [];
+var currenttabindex = 0;
+var pages = [];
+var currentpageindex = 0;
+/*dev mode*/
+var dev = true;
 
 function setupApp()
 {
     //stuff
+    setupTabs();
 }
 
 function setupTabs(){
-
+    tabs = document.querySelectorAll('.tab');
+    setupTabBtns();
+    for(let i = 0; i < tabs.length; i++)
+    {
+        setupPages(i);
+    }
 }
 
-function setupPages()
+function setupTabBtns()
+{
+    let tabbtns = document.querySelectorAll('#tabbtns button');
+    if(dev && (tabbtns.length != tabs.length)) 
+    {
+        alert('number of tabs mismatch with number of tab buttons');
+        return;
+    }
+    for(let i = 0; i < tabs.length; i++)
+    {
+        tabbtns[i].addEventListener('click', () => {switchTab(i)});
+        tabbtns[i].index = i;
+    }
+}
+
+function switchTab(index)
+{
+    if(index == currenttabindex) return;
+    tabs[currenttabindex].classList.remove("tabvisible");
+    tabs[index].classList.add("tabvisible");
+    currenttabindex = index;
+}
+
+/*function setupPages(index)
+{
+    let sidebarbtns = tabs[index].querySelectorAll('#sidebars button');
+    tabs[index].pages = tabs[index].querySelectorAll('.page');
+    tabs[index].currentpageindex = 0;
+    //at least for time being (doesnt take into account settings page or in general any page not linked to tab)
+    for(let i = 0; i < sidebarbtns.length; i++)
+    {
+        sidebarbtns[i].addEventListener('click', () => {
+            if(currentpageindex == i) return;
+            pages[currentpageindex].classList.remove("pagevisible");
+            pages[i].classList.add("pagevisible");
+            currentpageindex = i;
+        });
+    }
+}*/
+
+function setupPages(index)
+{
+    let sidebarbtns = tabs[index].querySelectorAll('.sidebar button');
+    tabs[index].pages = tabs[index].querySelectorAll('.page');
+    tabs[index].currentpageindex = 0;
+    for(let i = 0; i < sidebarbtns.length; i++)
+    {
+        sidebarbtns[i].addEventListener('click', () => {
+            if(tabs[index].currentpageindex == i) return;
+            tabs[index].pages[tabs[index].currentpageindex].classList.remove("pagevisible");
+            tabs[index].pages[i].classList.add("pagevisible");
+            tabs[index].currentpageindex = i;
+        });
+    }
+}
+
+/*function setupPages()
 {
     let sidebarbtns = document.querySelectorAll('#sidebars button');
     let pages = document.querySelectorAll('.page');
@@ -85,4 +153,4 @@ function setupPages()
             }
         });
     }
-}
+}*/

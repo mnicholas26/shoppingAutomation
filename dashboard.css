@@ -20,8 +20,12 @@ html, body{
 }
 
 .tab{
-    display: flex;
+    display: none;
     height: 100%;
+}
+
+.tabvisible{
+    display: flex;
 }
 
 .sidebar{
