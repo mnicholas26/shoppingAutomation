@@ -53,7 +53,12 @@ function clearTitles()
 
 
 //page constuction and link up
-window.onload = setupPages
+window.onload = setupApp;
+
+function setupApp()
+{
+    //stuff
+}
 
 function setupTabs(){
 
