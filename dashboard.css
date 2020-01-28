@@ -48,19 +48,37 @@ button{
     height: 50px;
     background-color: #353535;
     font-size: 20px;
+    position: relative;
 }
 
-.activetabbtn{
-    border-bottom: 3px solid deepskyblue;
-    transition: border-color 1.5s;
-}
-
-.activetabbtn:hover{
-    border-color: orange;
+#tabbtns button::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0;
+    background-color: orange;
+    transition: height .25s;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
 }
 
 #tabbtns button:hover{
-    color: orange;
+    background-color: #414141;
+}
+
+#tabbtns button:hover::after{
+    height: 3px;
+}
+
+#tabbtns .activetabbtn::after{
+    background-color: deepskyblue;
+    height: 3px;;
+}
+
+.sidebar .activepagebtn::after{
+    background-color: deepskyblue;
+    width: 7px;
 }
 
 #settingsbtn{
@@ -129,10 +147,6 @@ button{
     position: relative;
 }
 
-/*.sidebar button:hover{
-    color: orange;
-}*/
-
 .sidebar button::after{
     content: '';
     display: block;
@@ -183,12 +197,6 @@ button{
 .page::-webkit-scrollbar{
     width: 8px;
 }
-
-/*.page:hover::-webkit-scrollbar-thumb{
-  border-right-style: inset;
-  border-right-width: 8px;
-  border-color: inherit;
-}*/
 
 .page::-webkit-scrollbar-thumb{
     border-right-style: inset;
