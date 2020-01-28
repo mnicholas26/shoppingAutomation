@@ -91,7 +91,8 @@ function setupApp()
         let tabelem = document.createElement('div');
         tabelem.classList.add('tab');
         let tabbutton = document.createElement('button');
-        tabbutton.innerText = tab.title;
+        if(tab.title == "Settings") tabbutton = document.getElementById('settingsbtn');
+        else tabbutton.innerText = tab.title;
         let sidebarelem = document.createElement('div');
         sidebarelem.classList.add('sidebar');
         let pageselem = document.createElement('div');
@@ -147,7 +148,7 @@ function setupApp()
         });
         tabelem.appendChild(sidebarelem);
         tabelem.appendChild(pageselem);
-        tabbtnselem.appendChild(tabbutton);
+        if(tab.title != "Settings") tabbtnselem.appendChild(tabbutton);
         tabselem.appendChild(tabelem);
     }
 }
@@ -157,6 +158,43 @@ function widgetTitleTest(settings)
     let wrapper = document.createElement('div');
     wrapper.classList.add('titletest');
     function clearTitles()
+    {
+        while(wrapper.firstChild){
+            wrapper.removeChild(wrapper.firstChild);
+        }
+    }
+
+    function renderTitles(titles)
+    {
+        for(let i = 0; i < titles.length; i++)
+        {
+            let item = document.createElement('p');
+            item.textContent = titles[i];
+            wrapper.appendChild(item);
+        }
+    }
+
+    function update(titles)
+    {
+        clearTitles();
+        renderTitles(titles);
+    }
+
+    function start()
+    {
+        titlesFromStorage();
+    }
+
+    wrapper.update = update;
+    wrapper.start = start;
+    return wrapper;
+}
+
+function widgetStorageData(settings)
+{
+    let wrapper = document.createElement('div');
+    wrapper.classList.add('storagedata');
+    function clearDataElements()
     {
         while(wrapper.firstChild){
             wrapper.removeChild(wrapper.firstChild);

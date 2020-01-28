@@ -48,24 +48,26 @@
                 }
             ],
             "defaultpage": 0
+        },
+        {
+            "title": "Settings",
+            "pages":
+            [
+                {
+                    "title": "Saved Data",
+                    "widgets": []
+                },
+                {
+                    "title": "Page S2",
+                    "widgets": []
+                }
+            ],
+            "defaultpage": 0
         }
     ],
     "defaulttab": 0,
     "settings":
     {
-        
-        "pages":
-        [
-            {
-                "title": "Page S1",
-                "widgets": []
-            },
-            {
-                "title": "Page S2",
-                "widgets": []
-            }
-        ],
-        "defaultpage": 0,
         "placeholdersetting1": "blah",
         "placeholdersetting2": 18,
         "keybindings": {}

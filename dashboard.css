@@ -64,7 +64,7 @@ button{
 }
 
 #tabbtns button:hover{
-    background-color: #414141;
+    background-color: #454545;
 }
 
 #tabbtns button:hover::after{
