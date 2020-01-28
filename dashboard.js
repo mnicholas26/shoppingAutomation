@@ -78,7 +78,7 @@ function setupTabs(){
 
 function setupTabBtns()
 {
-    let tabbtns = document.querySelectorAll('#tabbtns button');
+    let tabbtns = document.querySelectorAll('#toolbar button');
     if(dev && (tabbtns.length != tabs.length)) 
     {
         alert('number of tabs mismatch with number of tab buttons');
@@ -86,18 +86,24 @@ function setupTabBtns()
     }
     for(let i = 0; i < tabs.length; i++)
     {
-        tabbtns[i].addEventListener('click', () => {switchTab(i)});
-        tabbtns[i].index = i;
+        tabbtns[i].addEventListener('click', () => {
+            if(i == currenttabindex) return;
+            tabs[currenttabindex].classList.remove("tabvisible");
+            tabs[i].classList.add("tabvisible");
+            tabbtns[currenttabindex].classList.remove("activetabbtn");
+            tabbtns[i].classList.add("activetabbtn");
+            currenttabindex = i;
+        });
     }
 }
 
-function switchTab(index)
+/*function switchTab(index)
 {
     if(index == currenttabindex) return;
     tabs[currenttabindex].classList.remove("tabvisible");
     tabs[index].classList.add("tabvisible");
     currenttabindex = index;
-}
+}*/
 
 /*function setupPages(index)
 {

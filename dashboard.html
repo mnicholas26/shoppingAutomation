@@ -3,18 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" type="text/css">
-  <!--<script src="background.js"></script>-->
-  <script src="dashboard.js"></script>
-  <!--<script src="address scraper.js"></script>-->
+    <link rel="stylesheet" href="dashboard.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:bold" rel="stylesheet">
+    <!--<script src="background.js"></script>-->
+    <script src="dashboard.js"></script>
+    <!--<script src="address scraper.js"></script>-->
   </head>
   <body>
     <div id="toolbar">
-      <ul id="tabbtns">
-        <button>tab 1</button>
-        <button>tab 2</button>
-      </ul>
-      <div id="settings"></div>
+      <div id="logo"></div>
+      <div id="tabbtns">
+        <button class="activetabbtn">Lorem</button>
+        <button>Ipsum</button>
+        <!--<button id="settingsbtn"></button>-->
+      </div>
+      <button id="settingsbtn"></button>
+      <!--<div id="settingsbtn">
+        <button></button>
+      </div>-->
     </div>
     <div id="tabs">
       <div class="tab tabvisible" id="tab1">
@@ -43,6 +49,16 @@
           <div class="page">pageb2</div>
           <div class="page">pageb3</div>
           <div class="page">pageb4</div>
+        </div>
+      </div>
+      <div class="tab" id="settingstab">
+        <div class="sidebar">
+          <button>pages1</button>
+          <button>pages2</button>
+        </div>
+        <div class="pages">
+          <div class="page pagevisible">pages1</div>
+          <div class="page">pages2</div>
         </div>
       </div>
     </div>

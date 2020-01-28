@@ -5,13 +5,71 @@
 html, body{
     height: 100%;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 #toolbar{
     height: 150px;
     width: 100%;
-    background-color: aqua;
+    background-color: #262626;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+button{
+    outline: none;
+    user-select: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+#logo{
+    height: 100px;
+    width: 100px;
+    background-image: url(logo.svg);
+    background-size: contain;
+    margin: 0 50px;
+}
+
+#tabbtns{
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 400px;
+    outline: none;
+}
+
+#tabbtns button{
+    width: 100px;
+    height: 50px;
+    background-color: #353535;
+    color: #eae7dc;
+    font-size: 20px;
+}
+
+.activetabbtn{
+    border-bottom: 3px solid deepskyblue;
+}
+
+#tabbtns button:hover{
+    color: orange;
+}
+
+#settingsbtn{
+    height: 50px;
+    width: 50px;
+    margin: 0 25px;
+    background-image: url(gear.svg);
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+}
+
+/*#settingsbtn.activetabbtn{
+
+}*/
 
 #tabs{
     height: calc(100% - 150px);
