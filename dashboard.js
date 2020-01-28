@@ -10,7 +10,7 @@ port.onMessage.addListener(function (msg)
     }
     else if(msg == "titles updated")
     {
-        //titlesFromStorage();
+        titlesFromStorage();
     }
     else if(msg == "make active")
     {
@@ -25,13 +25,10 @@ port.onMessage.addListener(function (msg)
 
 function titlesFromStorage()
 {
-    /*if(parent == undefined) parent = document.body;
-    chrome.storage.local.get({'titles': []}, (result) => {
-        if(result.titles.length > 0) renderTitles(result.titles, parent);
-    });*/
     chrome.storage.local.get({'titles': []}, (result) => {
         if(result.titles.length > 0)
         {
+            //use commas in query selector all to grab all appropriate widgets
             let widgets = document.querySelectorAll('.titletest');
             for(let i = 0; i < widgets.length; i++)
             {
@@ -40,26 +37,6 @@ function titlesFromStorage()
         }
     });
 }
-
-function renderTitles(titles, parent)
-{
-    clearTitles(parent);
-    for(let i = 0; i < titles.length; i++)
-    {
-        let item = document.createElement('p');
-        item.textContent = titles[i];
-        parent.appendChild(item);
-    }
-}
-
-/*function clearTitles(parent)
-{
-    while(parent.firstChild)
-    {
-        parent.removeChild(parent.firstChild);
-    }
-}*/
-
 
 
 //page constuction and link up
@@ -75,6 +52,8 @@ function setupApp()
 {
     //stuff
     setupTabs();
+    let elem1 = document.getElementById('currenttest');
+    widgetFactory(widgetTitleTest, elem1);
 }
 
 function setupTabs(){
@@ -123,8 +102,6 @@ function setupPages(index)
             tabs[index].currentpageindex = i;
         });
     }
-    let elem1 = document.getElementById('currenttest');
-    widgetFactory(widgetTitleTest, elem1);
 }
 
 function widgetTitleTest(settings)

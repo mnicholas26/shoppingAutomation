@@ -34,12 +34,6 @@ chrome.runtime.onConnect.addListener(function(port) {
                             console.log("saved titles");
                         });
                         dashboardport.postMessage("titles updated");
-                        /*for(let i = 0; i < titles.length; i++)
-                        {
-                            let item = document.createElement('p');
-                            item.textContent = titles[i];
-                            document.body.appendChild(item);
-                        }*/
                     }
                 }
             });

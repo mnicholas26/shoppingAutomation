@@ -188,6 +188,7 @@ button{
     border-color: rgba(0, 0, 0, 0.0);
     /* here we make the color transition */
     transition: border-color 0.75s ease;
+    font-size: 2em;
 }
 
 .page:hover{
@@ -206,8 +207,4 @@ button{
 
 .pagevisible{
     display: block;
-}
-
-.page p{
-    margin-bottom: 100px;
 }
