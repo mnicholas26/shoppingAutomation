@@ -1,0 +1,81 @@
+{
+    "css": [{}],
+    "tabs": 
+    [
+        {
+            "title": "Lorem",
+            "pages": 
+            [
+                {
+                    "title": "Overview",
+                    "widgets": ["widgetTitleTest"]
+                },
+                {
+                    "title": "Orders",
+                    "widgets": []
+                },
+                {
+                    "title": "Current Test",
+                    "widgets": ["widgetTitleTest"]
+                },
+                {
+                    "title": "Storage test",
+                    "widgets": []
+                }
+            ],
+            "defaultpage": 0
+
+        },
+        {
+            "title": "Ipsum",
+            "pages": 
+            [
+                {
+                    "title": "Page B1",
+                    "widgets": []
+                },
+                {
+                    "title": "Page B2",
+                    "widgets": []
+                },
+                {
+                    "title": "Page B3",
+                    "widgets": []
+                },
+                {
+                    "title": "Page B4",
+                    "widgets": []
+                }
+            ],
+            "defaultpage": 0
+        }
+    ],
+    "defaulttab": 0,
+    "settings":
+    {
+        
+        "pages":
+        [
+            {
+                "title": "Page S1",
+                "widgets": []
+            },
+            {
+                "title": "Page S2",
+                "widgets": []
+            }
+        ],
+        "defaultpage": 0,
+        "placeholdersetting1": "blah",
+        "placeholdersetting2": 18,
+        "keybindings": {}
+    
+    },
+    "widgets":
+    [
+        {
+            "name": "titlestest",
+            "path": "./modules/titlestest.mjs"
+        }
+    ]
+}
