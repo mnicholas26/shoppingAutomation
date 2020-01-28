@@ -153,7 +153,7 @@ function setupApp()
     }
 }
 
-function widgetTitleTest(settings)
+function widgetTitleTest(name, settings)
 {
     let wrapper = document.createElement('div');
     wrapper.classList.add('titletest');
@@ -190,36 +190,63 @@ function widgetTitleTest(settings)
     return wrapper;
 }
 
-function widgetStorageData(settings)
+function widgetStorageData(name, settings)
 {
-    let wrapper = document.createElement('div');
-    wrapper.classList.add('storagedata');
-    function clearDataElements()
+    let widgettemplate = template.widgets.find(o => o.name == name);
+    let wrapper = elementsFromTemplate(widgettemplate.treestructure);
+    let dataarea = wrapper.querySelector('.data');
+    wrapper.classList.add(name);
+    function clear()
     {
-        while(wrapper.firstChild){
-            wrapper.removeChild(wrapper.firstChild);
+        while(dataarea.firstChild){
+            dataarea.removeChild(dataarea.firstChild);
         }
     }
 
-    function renderTitles(titles)
+    function buildData(name)
     {
-        for(let i = 0; i < titles.length; i++)
+        console.log(name);
+        let dataelem = document.createElement('div');
+        let dataname = document.createElement('span');
+        dataname.innerText = name;
+        let closebtn = document.createElement('div');
+        closebtn.innerText = "X";
+        closebtn.classList.add('closebtn');
+        dataelem.appendChild(dataname);
+        dataelem.appendChild(closebtn);
+        return dataelem;
+    }
+
+    function render(data)
+    {
+        /*console.log(Object.entries(data));
+        for(let i = 0; i < data.length; i++)
         {
-            let item = document.createElement('p');
-            item.textContent = titles[i];
-            wrapper.appendChild(item);
+            console.log(i);
+            for(let [key, value] of Object.entries(data[i]))
+            {
+                console.log(test);
+                dataarea.appendChild(buildData(key));
+            }
+        }*/
+        console.log(Object.getOwnPropertyNames(data));
+        let names = Object.getOwnPropertyNames(data);
+        for(let i = 0; i < names.length; i++)
+        {
+            console.log(dataarea);
+            dataarea.appendChild(buildData(names[i]));
         }
     }
 
     function update(titles)
     {
-        clearTitles();
-        renderTitles(titles);
+        clear();
+        render();
     }
 
     function start()
     {
-        titlesFromStorage();
+        chrome.storage.local.get(null, function (items) {render(items)});
     }
 
     wrapper.update = update;
@@ -229,7 +256,29 @@ function widgetStorageData(settings)
 
 function widgetFactory(widget, parent, settings)
 {
-    let newwidget = widget(settings);
+    let newwidget = widget(widget.name, settings);
     parent.appendChild(newwidget);
     newwidget.start();
+}
+
+function elementsFromTemplate(treestructure, settings)
+{ 
+    let element = document.createElement(treestructure.element);
+    if(treestructure.classes != undefined)
+    {
+        for(let i = 0; i < treestructure.classes.length; i++)
+        {
+            element.classList.add(treestructure.classes[i]);
+        }
+    }
+    if(treestructure.id != undefined) element.id = treestructure.id;
+    if(treestructure.children != undefined)
+    {
+        for(let i = 0; i < treestructure.children.length; i++)
+        {
+            element.appendChild(elementsFromTemplate(treestructure.children[i], settings));
+        }
+    }
+    if(treestructure.innertext != undefined) element.innerText = treestructure.innertext;
+    return element;
 }

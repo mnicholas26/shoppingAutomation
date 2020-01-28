@@ -208,3 +208,30 @@ button{
 .pagevisible{
     display: block;
 }
+
+.widgetStorageData{
+    border: red 2px solid;
+}
+
+.widgetStorageData .data{
+    width: 80%;
+    border: deepskyblue 2px solid;
+}
+
+.widgetStorageData .data > div{
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    align-content: center;
+    border: yellow solid 2px;
+}
+
+.widgetStorageData .closebtn{
+    height: 30px;
+    width: 30px;
+    background-color: deepskyblue;
+    color: #262626;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+}
