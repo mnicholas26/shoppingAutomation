@@ -10,7 +10,7 @@ port.onMessage.addListener(function (msg)
     }
     else if(msg == "titles updated")
     {
-        titlesFromStorage();
+        //titlesFromStorage();
     }
     else if(msg == "make active")
     {
@@ -25,30 +25,40 @@ port.onMessage.addListener(function (msg)
 
 function titlesFromStorage()
 {
+    /*if(parent == undefined) parent = document.body;
     chrome.storage.local.get({'titles': []}, (result) => {
-        if(result.titles.length > 0) renderTitles(result.titles);
+        if(result.titles.length > 0) renderTitles(result.titles, parent);
+    });*/
+    chrome.storage.local.get({'titles': []}, (result) => {
+        if(result.titles.length > 0)
+        {
+            let widgets = document.querySelectorAll('.titletest');
+            for(let i = 0; i < widgets.length; i++)
+            {
+                widgets[i].update(result.titles)
+            }
+        }
     });
 }
 
-function renderTitles(titles)
+function renderTitles(titles, parent)
 {
-    clearTitles();
+    clearTitles(parent);
     for(let i = 0; i < titles.length; i++)
     {
-        console.log(titles[i]);
         let item = document.createElement('p');
         item.textContent = titles[i];
-        document.body.appendChild(item);
+        parent.appendChild(item);
     }
 }
 
-function clearTitles()
+/*function clearTitles(parent)
 {
-    while(document.body.firstChild)
+    while(parent.firstChild)
     {
-        document.body.removeChild(document.body.firstChild);
+        parent.removeChild(parent.firstChild);
     }
-}
+}*/
 
 
 
@@ -97,31 +107,6 @@ function setupTabBtns()
     }
 }
 
-/*function switchTab(index)
-{
-    if(index == currenttabindex) return;
-    tabs[currenttabindex].classList.remove("tabvisible");
-    tabs[index].classList.add("tabvisible");
-    currenttabindex = index;
-}*/
-
-/*function setupPages(index)
-{
-    let sidebarbtns = tabs[index].querySelectorAll('#sidebars button');
-    tabs[index].pages = tabs[index].querySelectorAll('.page');
-    tabs[index].currentpageindex = 0;
-    //at least for time being (doesnt take into account settings page or in general any page not linked to tab)
-    for(let i = 0; i < sidebarbtns.length; i++)
-    {
-        sidebarbtns[i].addEventListener('click', () => {
-            if(currentpageindex == i) return;
-            pages[currentpageindex].classList.remove("pagevisible");
-            pages[i].classList.add("pagevisible");
-            currentpageindex = i;
-        });
-    }
-}*/
-
 function setupPages(index)
 {
     let sidebarbtns = tabs[index].querySelectorAll('.sidebar button');
@@ -138,27 +123,50 @@ function setupPages(index)
             tabs[index].currentpageindex = i;
         });
     }
+    let elem1 = document.getElementById('currenttest');
+    widgetFactory(widgetTitleTest, elem1);
 }
 
-/*function setupPages()
+function widgetTitleTest(settings)
 {
-    let sidebarbtns = document.querySelectorAll('#sidebars button');
-    let pages = document.querySelectorAll('.page');
-    let pageswrapper = document.getElementById('pages');
-    pageswrapper.pages = pages;
-    pageswrapper.currentpage = 0;
-    pages[0].classList.add("pagevisible");
-    //at least for time being (doesnt take into account settings page or in general any page not linked to tab)
-    for(let i = 0; i < sidebarbtns.length; i++)
+    let wrapper = document.createElement('div');
+    wrapper.classList.add('titletest');
+    function clearTitles()
     {
-        sidebarbtns[i].addEventListener('click', () => {
-            if(pageswrapper.currentpage == i) return;
-            else 
-            {
-                pageswrapper.pages[pageswrapper.currentpage].classList.remove("pagevisible");
-                pages[i].classList.add("pagevisible");
-                pageswrapper.currentpage = i;
-            }
-        });
+        while(wrapper.firstChild){
+            wrapper.removeChild(wrapper.firstChild);
+        }
     }
-}*/
+
+    function renderTitles(titles)
+    {
+        for(let i = 0; i < titles.length; i++)
+        {
+            let item = document.createElement('p');
+            item.textContent = titles[i];
+            wrapper.appendChild(item);
+        }
+    }
+
+    function update(titles)
+    {
+        clearTitles();
+        renderTitles(titles);
+    }
+
+    function start()
+    {
+        titlesFromStorage();
+    }
+
+    wrapper.update = update;
+    wrapper.start = start;
+    return wrapper;
+}
+
+function widgetFactory(widget, parent, settings)
+{
+    let newwidget = widget(settings);
+    parent.appendChild(newwidget);
+    newwidget.start();
+}
