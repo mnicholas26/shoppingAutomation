@@ -133,6 +133,8 @@ function setupPages(index)
             if(tabs[index].currentpageindex == i) return;
             tabs[index].pages[tabs[index].currentpageindex].classList.remove("pagevisible");
             tabs[index].pages[i].classList.add("pagevisible");
+            sidebarbtns[tabs[index].currentpageindex].classList.remove("activepagebtn");
+            sidebarbtns[i].classList.add("activepagebtn");
             tabs[index].currentpageindex = i;
         });
     }
