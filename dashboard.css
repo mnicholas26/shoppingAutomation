@@ -52,6 +52,11 @@ button{
 
 .activetabbtn{
     border-bottom: 3px solid deepskyblue;
+    transition: border-color 1.5s;
+}
+
+.activetabbtn:hover{
+    border-color: orange;
 }
 
 #tabbtns button:hover{
@@ -121,14 +126,36 @@ button{
     background-color: #262626;
     margin-top: 5px;
     font-size: 20px;
+    position: relative;
 }
 
-.activepagebtn{
-    border-right: 7px solid deepskyblue;
+/*.sidebar button:hover{
+    color: orange;
+}*/
+
+.sidebar button::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: orange;
+    transition: width .2s;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 .sidebar button:hover{
-    color: orange;
+    background-color: #414141;
+}
+
+.sidebar button:hover::after{
+    width: 7px;
+}
+
+.sidebar .activepagebtn::after{
+    background-color: deepskyblue;
+    width: 7px;
 }
 
 .pages{
@@ -142,8 +169,37 @@ button{
     background-color: #444444;
     display: none;
     padding: 24px 24px 0 24px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-color: rgba(0, 0, 0, 0.0);
+    /* here we make the color transition */
+    transition: border-color 0.75s ease;
 }
+
+.page:hover{
+    border-color: deepskyblue;
+}
+
+.page::-webkit-scrollbar{
+    width: 8px;
+}
+
+/*.page:hover::-webkit-scrollbar-thumb{
+  border-right-style: inset;
+  border-right-width: 8px;
+  border-color: inherit;
+}*/
+
+.page::-webkit-scrollbar-thumb{
+    border-right-style: inset;
+    border-right-width: 8px;
+    border-color: inherit;
+  }
 
 .pagevisible{
     display: block;
+}
+
+.page p{
+    margin-bottom: 100px;
 }
