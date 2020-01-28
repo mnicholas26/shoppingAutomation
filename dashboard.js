@@ -150,64 +150,6 @@ function setupApp()
         tabbtnselem.appendChild(tabbutton);
         tabselem.appendChild(tabelem);
     }
-    //setupTabs();
-}
-
-/*function setupApp()
-{
-    setupTabs();
-    setupWidgets();
-    //let elem1 = document.getElementById('currenttest');
-    //widgetFactory(widgetTitleTest, elem1);
-}*/
-
-function setupTabs(){
-
-    /*tabs = document.querySelectorAll('.tab');
-    setupTabBtns();
-    for(let i = 0; i < tabs.length; i++)
-    {
-        setupPages(i);
-    }*/
-}
-
-function setupTabBtns()
-{
-    let tabbtns = document.querySelectorAll('#toolbar button');
-    if(dev && (tabbtns.length != tabs.length)) 
-    {
-        alert('number of tabs mismatch with number of tab buttons');
-        return;
-    }
-    for(let i = 0; i < tabs.length; i++)
-    {
-        tabbtns[i].addEventListener('click', () => {
-            if(i == currenttabindex) return;
-            tabs[currenttabindex].classList.remove("tabvisible");
-            tabs[i].classList.add("tabvisible");
-            tabbtns[currenttabindex].classList.remove("activetabbtn");
-            tabbtns[i].classList.add("activetabbtn");
-            currenttabindex = i;
-        });
-    }
-}
-
-function setupPages(index)
-{
-    let sidebarbtns = tabs[index].querySelectorAll('.sidebar button');
-    tabs[index].pages = tabs[index].querySelectorAll('.page');
-    tabs[index].currentpageindex = 0;
-    for(let i = 0; i < sidebarbtns.length; i++)
-    {
-        sidebarbtns[i].addEventListener('click', () => {
-            if(tabs[index].currentpageindex == i) return;
-            tabs[index].pages[tabs[index].currentpageindex].classList.remove("pagevisible");
-            tabs[index].pages[i].classList.add("pagevisible");
-            sidebarbtns[tabs[index].currentpageindex].classList.remove("activepagebtn");
-            sidebarbtns[i].classList.add("activepagebtn");
-            tabs[index].currentpageindex = i;
-        });
-    }
 }
 
 function widgetTitleTest(settings)
