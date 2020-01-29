@@ -78,41 +78,6 @@
         {
             "name": "titlestest",
             "path": "./modules/titlestest.mjs"
-        },
-        {
-            "name": "widgetStorageData",
-            "treestructure":
-            {
-                "element": "div",
-                "children":
-                [
-                    {
-                        "element": "h3",
-                        "innertext": "Storage Data"
-                    },
-                    {
-                        "element": "button",
-                        "innertext": "testy"
-                    },
-                    {
-                        "element": "div",
-                        "classes": ["data"]
-                    }
-                ]
-            },
-            "datastructure":
-            {
-                "element": "div",
-                "children":
-                [
-                    {
-                        "element": "div"
-                    },
-                    {
-                        "element": "button"
-                    }
-                ]
-            }
         }
     ]
 }

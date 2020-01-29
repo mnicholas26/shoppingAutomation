@@ -38,7 +38,6 @@ function titlesFromStorage()
     });
 }
 
-
 //page constuction and link up
 window.onload = importTemplates;
 var tabs = [];
@@ -151,9 +150,29 @@ function setupApp()
         if(tab.title != "Settings") tabbtnselem.appendChild(tabbutton);
         tabselem.appendChild(tabelem);
     }
+
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+        for (var key in changes) {
+            var storageChange = changes[key];
+            console.log('Storage key "%s" in namespace "%s" changed. ' +
+                        'Old value was "%s", new value is "%s".',
+                        key,
+                        namespace,
+                        storageChange.oldValue,
+                        storageChange.newValue);
+        }
+        let widgets = document.querySelectorAll('.widgetStorageData');
+        for(let i = 0; i < widgets.length; i++)
+        {
+            widgets[i].update()
+        }
+    });
+
+    /*chrome.storage.local.set({test1: 10});
+    chrome.storage.local.set({test2: "testy"});*/
 }
 
-function widgetTitleTest(name, settings)
+function widgetTitleTest(settings)
 {
     let wrapper = document.createElement('div');
     wrapper.classList.add('titletest');
@@ -190,12 +209,14 @@ function widgetTitleTest(name, settings)
     return wrapper;
 }
 
-function widgetStorageData(name, settings)
+function widgetStorageData(settings)
 {
-    let widgettemplate = template.widgets.find(o => o.name == name);
-    let wrapper = elementsFromTemplate(widgettemplate.treestructure);
-    let dataarea = wrapper.querySelector('.data');
-    wrapper.classList.add(name);
+    let blocking = false;
+    let wrapper = document.createElement('div');
+    wrapper.textContent = "Storage Data";
+    let dataarea = document.createElement('div');
+    dataarea.classList.add('data');
+    wrapper.appendChild(dataarea);
     function clear()
     {
         while(dataarea.firstChild){
@@ -205,13 +226,14 @@ function widgetStorageData(name, settings)
 
     function buildData(name)
     {
-        console.log(name);
+        //console.log(name);
         let dataelem = document.createElement('div');
         let dataname = document.createElement('span');
         dataname.innerText = name;
         let closebtn = document.createElement('div');
         closebtn.innerText = "X";
         closebtn.classList.add('closebtn');
+        closebtn.addEventListener('click', () => chrome.storage.local.remove(name));
         dataelem.appendChild(dataname);
         dataelem.appendChild(closebtn);
         return dataelem;
@@ -219,29 +241,21 @@ function widgetStorageData(name, settings)
 
     function render(data)
     {
-        /*console.log(Object.entries(data));
-        for(let i = 0; i < data.length; i++)
-        {
-            console.log(i);
-            for(let [key, value] of Object.entries(data[i]))
-            {
-                console.log(test);
-                dataarea.appendChild(buildData(key));
-            }
-        }*/
-        console.log(Object.getOwnPropertyNames(data));
+        //console.log(Object.getOwnPropertyNames(data));
         let names = Object.getOwnPropertyNames(data);
         for(let i = 0; i < names.length; i++)
         {
-            console.log(dataarea);
             dataarea.appendChild(buildData(names[i]));
         }
+        blocking = false;
     }
 
-    function update(titles)
+    function update()
     {
+        if(blocking) return;
+        blocking = true;
         clear();
-        render();
+        chrome.storage.local.get(null, function (items) {render(items)});
     }
 
     function start()
@@ -256,12 +270,13 @@ function widgetStorageData(name, settings)
 
 function widgetFactory(widget, parent, settings)
 {
-    let newwidget = widget(widget.name, settings);
+    let newwidget = widget(settings);
+    newwidget.classList.add(widget.name);
     parent.appendChild(newwidget);
     newwidget.start();
 }
 
-function elementsFromTemplate(treestructure, settings)
+/*function elementsFromTemplate(treestructure, settings)
 { 
     let element = document.createElement(treestructure.element);
     if(treestructure.classes != undefined)
@@ -281,4 +296,4 @@ function elementsFromTemplate(treestructure, settings)
     }
     if(treestructure.innertext != undefined) element.innerText = treestructure.innertext;
     return element;
-}
+}*/
